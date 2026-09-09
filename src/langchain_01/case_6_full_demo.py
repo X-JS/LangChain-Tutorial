@@ -1,5 +1,6 @@
 """6. 完整示例：读入用户反馈 -> 抽成结构化数据 -> 流式生成客服处理建议"""
 
+import os
 from typing import Literal
 
 from dotenv import load_dotenv
@@ -10,7 +11,10 @@ from pydantic import BaseModel, Field
 
 load_dotenv()
 
-model = init_chat_model("ollama:qwen3.5:9b", base_url="http://192.168.211.163:11434")
+model = init_chat_model(
+    os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+)
 
 
 class Feedback(BaseModel):

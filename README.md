@@ -32,7 +32,7 @@ uv sync
 (Invoke-RestMethod -Uri "http://192.168.211.163:11434/api/tags").models.name
 ```
 
-脚本默认连接 `http://192.168.211.163:11434` 的 `qwen3.5:9b`。若你的地址或模型不同，修改各 `case_*.py` 中 `init_chat_model("ollama:qwen3.5:9b", base_url="...")` 的模型名与 `base_url` 即可。模型需支持工具调用，否则 §4.1/§5/§6 无法跑通。
+脚本通过 `.env` 中的 `OLLAMA_BASE_URL` 与 `OLLAMA_MODEL` 读取连接信息（默认 `http://192.168.211.163:11434` 的 `qwen3.5:9b`）。复制 `.env.example` 为 `.env` 并按需修改即可切换地址/模型。模型需支持工具调用，否则 §4.1/§5/§6 无法跑通。
 
 ### 3. 运行案例
 

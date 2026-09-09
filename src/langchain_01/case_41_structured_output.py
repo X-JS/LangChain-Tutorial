@@ -1,5 +1,6 @@
 """4.1 结构化输出：Pydantic 模型 + with_structured_output"""
 
+import os
 from typing import Literal
 
 from dotenv import load_dotenv
@@ -16,7 +17,10 @@ class Feedback(BaseModel):
     summary: str = Field(description="一句话概括，不超过 30 字")
 
 
-model = init_chat_model("ollama:qwen3.5:9b", base_url="http://192.168.211.163:11434")
+model = init_chat_model(
+    os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+)
 extractor = model.with_structured_output(Feedback)
 
 result = extractor.invoke("付款页面点了三次都没反应，钱扣了订单没生成，急死了")

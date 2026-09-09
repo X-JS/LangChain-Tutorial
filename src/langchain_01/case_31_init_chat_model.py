@@ -1,9 +1,17 @@
 """3.1 一行接入模型"""
 
+import os
+
+from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import SystemMessage, HumanMessage
 
-model = init_chat_model("ollama:qwen3.5:9b", base_url="http://192.168.211.163:11434")
+load_dotenv()
+
+model = init_chat_model(
+    os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+)
 
 resp = model.invoke("用一句话解释什么是向量数据库")
 print(f"response content:\n{resp.content}")

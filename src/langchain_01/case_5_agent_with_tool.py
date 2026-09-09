@@ -1,5 +1,7 @@
 """5. 给模型加工具：create_agent 工具调用循环"""
 
+import os
+
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
@@ -16,7 +18,10 @@ def get_order_status(order_id: str) -> str:
 
 
 agent = create_agent(
-    model=init_chat_model("ollama:qwen3.5:9b", base_url="http://192.168.211.163:11434"),
+    model=init_chat_model(
+        os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
+        base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+    ),
     tools=[get_order_status],
     system_prompt="你是电商客服助手。涉及订单状态的问题必须调用工具查询，不要凭猜测回答。",
 )

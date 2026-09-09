@@ -1,10 +1,18 @@
 """4.2 流式输出：逐字返回结果，不用等模型写完"""
 
+import os
+
+from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
-model = init_chat_model("ollama:qwen3.5:9b", base_url="http://192.168.211.163:11434")
+load_dotenv()
+
+model = init_chat_model(
+    os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
+    base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+)
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "你是{role}，用{style}的风格回答，不要客套。"),
