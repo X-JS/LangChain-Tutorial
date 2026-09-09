@@ -1,7 +1,5 @@
 # langchain-01
 
-[LangChain 系列：认识 LangChain——概述与快速入门](https://mp.weixin.qq.com/s?__biz=MjM5Njg0NTgyOQ==&mid=2247484515&idx=1&sn=1170e253d34b87ec6ccf0ec9e8d37fe8) 的实战案例代码。
-
 通过本地 [Ollama](https://ollama.com)（`http://192.168.211.163:11434`，默认模型 `qwen3.5:9b`）跑通 LangChain 的基础用法骨架：模型接入、提示词模板、管道组合、结构化输出、流式输出、带工具调用的 Agent。
 
 环境基线：Python 3.14、LangChain 1.2.x（`uv` 管理）。
