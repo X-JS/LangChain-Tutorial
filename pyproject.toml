@@ -1,0 +1,28 @@
+[project]
+name = "langchain-tutorial"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "js", email = "493994160@qq.com" }
+]
+requires-python = ">=3.14"
+
+dependencies = [
+    "langchain==1.2.12",
+    "langchain-ollama>=1.1.0",
+    "langchain-openai>=1.6.1",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+]
+
+[project.scripts]
+langchain-01 = "langchain_01:main"
+langchain-02 = "langchain_02:main"
+
+[tool.uv.build-backend]
+module-name = ["langchain_01", "langchain_02"]
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
