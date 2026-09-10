@@ -20,7 +20,7 @@ messages = prompt.invoke({
 })
 
 model = init_chat_model(
-    os.getenv("OLLAMA_MODEL", "ollama:qwen3.5:9b"),
-    base_url=os.getenv("OLLAMA_BASE_URL", "http://192.168.211.163:11434"),
+    os.getenv("OLLAMA_MODEL"),
+    base_url=os.getenv("OLLAMA_BASE_URL"),
 )
 print(model.invoke(messages).content)
