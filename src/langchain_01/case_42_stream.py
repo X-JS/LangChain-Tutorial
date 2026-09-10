@@ -1,17 +1,20 @@
 """4.2 流式输出：逐字返回结果，不用等模型写完"""
 
-import os
-
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from common.config import (
+    get_ollama_model,
+    get_ollama_base_url
+)
+
 
 load_dotenv(override=True)
 
 model = init_chat_model(
-    os.getenv("OLLAMA_MODEL"),
-    base_url=os.getenv("OLLAMA_BASE_URL"),
+    f"ollama:{get_ollama_model()}",
+    base_url=get_ollama_base_url()
 )
 
 prompt = ChatPromptTemplate.from_messages([

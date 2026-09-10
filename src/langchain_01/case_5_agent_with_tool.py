@@ -1,11 +1,13 @@
 """5. 给模型加工具：create_agent 工具调用循环"""
 
-import os
-
 from dotenv import load_dotenv
 from langchain.agents import create_agent
-from langchain.chat_models import init_chat_model
 from langchain_core.tools import tool
+from langchain_ollama import ChatOllama
+from common.config import (
+    get_ollama_model,
+    get_ollama_base_url
+)
 
 load_dotenv(override=True)
 
@@ -16,15 +18,15 @@ def get_order_status(order_id: str) -> str:
     fake_db = {"SO-12345": "已发货，预计明天送达", "SO-67890": "支付失败"}
     return fake_db.get(order_id, "未找到该订单")
 
-model = init_chat_model(
-    model=os.getenv("OLLAMA_MODEL"),
-    base_url=os.getenv("OLLAMA_BASE_URL")
+model = ChatOllama(
+    model=get_ollama_model(),
+    base_url=get_ollama_base_url()
 )
 
 agent = create_agent(
     model=model,
     tools=[get_order_status],
-    system_prompt="你是电商客服助手。涉及订单状态的问题必须调用工具查询，不要凭猜测回答。",
+    system_prompt="你是电商客服助手。涉及订单状态的问题必须调用工具查询，不要凭猜测回答。"
 )
 
 result = agent.invoke({

@@ -1,19 +1,21 @@
 """6. 完整示例：读入用户反馈 -> 抽成结构化数据 -> 流式生成客服处理建议"""
 
-import os
 from typing import Literal
-
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
+from common.config import (
+    get_ollama_model,
+    get_ollama_base_url
+)
 
 load_dotenv(override=True)
 
 model = init_chat_model(
-    os.getenv("OLLAMA_MODEL"),
-    base_url=os.getenv("OLLAMA_BASE_URL"),
+    f"ollama:{get_ollama_model()}",
+    base_url=get_ollama_base_url()
 )
 
 

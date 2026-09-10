@@ -1,11 +1,14 @@
 """4.1 结构化输出：Pydantic 模型 + with_structured_output"""
 
-import os
 from typing import Literal
-
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
+from common.config import (
+    get_ollama_model,
+    get_ollama_base_url
+)
+
 
 load_dotenv(override=True)
 
@@ -18,8 +21,8 @@ class Feedback(BaseModel):
 
 
 model = init_chat_model(
-    os.getenv("OLLAMA_MODEL"),
-    base_url=os.getenv("OLLAMA_BASE_URL"),
+    f"ollama:{get_ollama_model()}",
+    base_url=get_ollama_base_url()
 )
 extractor = model.with_structured_output(Feedback)
 
