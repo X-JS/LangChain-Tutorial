@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 
-load_dotenv()
+load_dotenv(override=True)
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "你是{role}，用{style}的风格回答，不要客套。"),

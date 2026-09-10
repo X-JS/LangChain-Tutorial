@@ -9,7 +9,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
-load_dotenv()
+load_dotenv(override=True)
 
 model = init_chat_model(
     os.getenv("OLLAMA_MODEL"),

@@ -7,7 +7,7 @@ from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain_core.tools import tool
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 @tool
